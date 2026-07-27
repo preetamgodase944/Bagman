@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./TrainingDetailsPage.css";
-import { downloadBrochure } from "../components/Helper/CommonFuctions";
+import { downloadBrochure } from "../utils/brochure";
+import { scrollToElement } from "../utils/scroll";
 
 const heroImage = "/assets/training-hero.png";
 
@@ -99,15 +100,6 @@ const trainingModules = [
 ];
 
 const TrainingDetailsPage = () => {
-  const scrollToSection = (sectionId) => {
-    setTimeout(() => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
-
   // Render different types of content based on module type
   const renderModuleContent = (module) => {
     switch (module.type) {
@@ -158,7 +150,7 @@ const TrainingDetailsPage = () => {
           <p>
             Elevate your skills with our comprehensive training programs designed for professionals and students alike.
           </p>
-          <button className="download-btn" onClick={() => downloadBrochure()}>
+          <button className="download-btn" onClick={downloadBrochure}>
             Download Brochure
           </button>
         </div>
@@ -197,14 +189,13 @@ const TrainingDetailsPage = () => {
         <p>
           Enroll in our training programs today and gain the skills you need to excel in the field of industrial automation.
         </p>
-        <button className="enroll-btn">
-          <Link
-            href="/#contact-us"
-            onClick={() => scrollToSection('contact-us')}
-          >
-            Contact Now
-          </Link>
-        </button>
+        <Link
+          href="/#contact-us"
+          className="enroll-btn"
+          onClick={() => scrollToElement('contact-us', 100)}
+        >
+          Contact Now
+        </Link>
       </div>
     </div>
   );

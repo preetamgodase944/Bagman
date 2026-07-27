@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import './Divisions.css';
-import { scrollToTop } from '../../utils/Helper';
+import { scrollToTop, scrollToElement } from '../../utils/scroll';
 
 const divisions = [
   {
@@ -32,8 +32,7 @@ const divisions = [
 export default function Divisions() {
   const handleClick = (d) => {
     if (d.hash) {
-      const el = document.getElementById(d.hash);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      scrollToElement(d.hash);
     } else {
       scrollToTop();
     }

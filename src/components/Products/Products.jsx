@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import './Products.css';
 
@@ -68,20 +68,33 @@ export default function Products() {
     }
   };
 
-  // Handle learn more click
-  const handleLearnMore = (productId, e) => {
+  const activeProduct = activeModal ? productDetails[activeModal] : null;
+
+  const openModal = (productId, e) => {
     e.preventDefault();
     setActiveModal(productId);
-    // Prevent body scrolling when modal is open
-    document.body.style.overflow = 'hidden';
   };
 
-  // Close modal handler
-  const closeModal = () => {
-    setActiveModal(null);
-    // Re-enable body scrolling when modal is closed
-    document.body.style.overflow = 'auto';
-  };
+  const closeModal = () => setActiveModal(null);
+
+  // While a modal is open, lock body scroll and close on Escape — restoring
+  // the previous overflow value (and the listener) on close/unmount.
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setActiveModal(null);
+    };
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [activeModal]);
 
   return (
     <section className="products section" id="products">
@@ -116,7 +129,7 @@ export default function Products() {
                   <p className="product-description">{product.shortDesc}</p>
                   <button
                     className="product-link"
-                    onClick={(e) => handleLearnMore(productId, e)}
+                    onClick={(e) => openModal(productId, e)}
                     aria-label={`Learn more about ${product.title}`}
                   >
                     Learn more
@@ -130,7 +143,7 @@ export default function Products() {
       </div>
 
       {/* Product Detail Modal */}
-      {activeModal && (
+      {activeProduct && (
         <div
           className="product-modal-overlay"
           onClick={closeModal}
@@ -148,20 +161,20 @@ export default function Products() {
             </button>
             <div className="modal-image-container">
               <Image
-                src={productDetails[activeModal].image}
-                alt={productDetails[activeModal].title}
+                src={activeProduct.image}
+                alt={activeProduct.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
                 className="modal-image"
               />
             </div>
             <div className="modal-content">
-              <h2 id={`modal-title-${activeModal}`}>{productDetails[activeModal].title}</h2>
-              <p className="modal-description">{productDetails[activeModal].fullDesc}</p>
+              <h2 id={`modal-title-${activeModal}`}>{activeProduct.title}</h2>
+              <p className="modal-description">{activeProduct.fullDesc}</p>
               <h3>Key Features</h3>
               <ul className="feature-list">
-                {productDetails[activeModal].features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
+                {activeProduct.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
                 ))}
               </ul>
               <div className="modal-footer">

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./TradingDetailsPage.css";
-import { scrollToTop } from "../utils/Helper";
+import { scrollToTop } from "../utils/scroll";
 
 const vbox = '/assets/vbox.png';
 const servo = '/assets/servo.png';

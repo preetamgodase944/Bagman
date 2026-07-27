@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from '../Logo';
 import './Navbar.css';
-import { scrollToTop } from '../../utils/Helper';
+import { scrollToTop, scrollToElement } from '../../utils/scroll';
 
 const menu_icon = '/assets/menu-icon.svg';
 const close_icon = '/assets/close-icon.svg';
@@ -34,28 +34,10 @@ export default function Navbar() {
 
   const toggleMobileMenu = () => setShowMobileMenu(prev => !prev);
 
-  // Updated function to handle section navigation
   const scrollToSection = (sectionId) => {
-    // First navigate to homepage if not already there
-    if (pathname !== '/') {
-      // We need to set a timeout to allow the page to change before scrolling
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      // Already on homepage, just scroll
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-    // Close mobile menu if open
-    if (showMobileMenu) {
-      setShowMobileMenu(false);
-    }
+    // When on another route, wait for the homepage to render before scrolling.
+    scrollToElement(sectionId, pathname === '/' ? 0 : 100);
+    if (showMobileMenu) setShowMobileMenu(false);
   };
 
   const isLinkActive = (to, linkHash) => {
@@ -73,14 +55,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
-        <Link
-          href="/"
-          className="navbar-logo"
-          onClick={() => {
-            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-            if (showMobileMenu) setShowMobileMenu(false);
-          }}
-        >
+        <Link href="/" className="navbar-logo" onClick={handleScrollToTop}>
           <Logo height='55px' />
         </Link>
         <ul className={`navbar-links ${showMobileMenu ? 'show-menu' : ''}`}>
@@ -88,10 +63,7 @@ export default function Navbar() {
             <Link
               href="/"
               className={`nav-button ${pathname === '/' && !hash ? 'active' : ''}`}
-              onClick={() => {
-                window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-                if (showMobileMenu) setShowMobileMenu(false);
-              }}
+              onClick={handleScrollToTop}
             >
               Home
             </Link>

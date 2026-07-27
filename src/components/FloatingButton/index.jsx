@@ -2,20 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import './style.css';
-import { downloadBrochure } from '../Helper/CommonFuctions';
+import { downloadBrochure } from '../../utils/brochure';
 
 const FloatingButton = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     // Show button after scrolling down a bit
     useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 100) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
-        };
+        const handleScroll = () => setIsVisible(window.scrollY > 100);
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);

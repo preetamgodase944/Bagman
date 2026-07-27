@@ -12,14 +12,16 @@ const whatsapp_icon = '/assets/whatsapp.svg';
 export default function Contact() {
 
   const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async (event) => {
-    try {
-      event.preventDefault();
-      setResult("Sending....");
-      const formData = new FormData(event.target);
+    event.preventDefault();
+    const form = event.target;
+    setIsSubmitting(true);
+    setResult("Sending....");
 
-      // Use environment variable here
+    try {
+      const formData = new FormData(form);
       formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY);
 
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -30,7 +32,7 @@ export default function Contact() {
       const data = await response.json();
       if (data.success) {
         setResult("Message sent — we'll be in touch shortly.");
-        event.target.reset();
+        form.reset();
       } else {
         console.error("Error", data);
         setResult(data.message);
@@ -38,6 +40,8 @@ export default function Contact() {
     } catch (error) {
       console.error("Error", error);
       setResult("Something went wrong. Please try again, or email us directly.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -98,7 +102,9 @@ export default function Contact() {
             <label htmlFor='message'>Message</label>
             <textarea id='message' name='message' rows={6} placeholder='What can we help you automate?' required />
 
-            <button type='submit' className='btn btn--primary contact-submit'>Send message</button>
+            <button type='submit' className='btn btn--primary contact-submit' disabled={isSubmitting}>
+              {isSubmitting ? 'Sending…' : 'Send message'}
+            </button>
 
             {result && <span className="form-result">{result}</span>}
           </form>

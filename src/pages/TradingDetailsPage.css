@@ -1,286 +1,213 @@
 .trading-details-page {
-  max-width: 1200px;
-  margin: 100px auto;
-  padding: 0 20px 40px;
-  color: var(--text-color);
-}
-
-/* Hero Section */
-.hero-section {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  margin-bottom: 50px;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.hero-image {
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-  width: 100%;
-  height: 100%
-}
-
-.hero-overlay {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 40px;
-  border-radius: 12px;
-  backdrop-filter: blur(5px);
-  max-width: 700px;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.hero-overlay h1 {
-  font-size: 42px;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.hero-overlay p {
-  font-size: 18px;
-  line-height: 1.6;
-  max-width: 800px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  color: #fff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  padding: calc(var(--header-height) + 2.5rem) var(--container-padding) 5rem;
+  color: var(--text);
 }
 
-/* Grid Layout */
-.trading-module-grid {
+/* --- Hero band --- */
+.trading-details-page .hero-section {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 380px;
+  margin-bottom: 3.5rem;
+  padding: 2.5rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.trading-details-page .hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.trading-details-page .hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(21, 23, 28, 0.92) 0%, rgba(21, 23, 28, 0.55) 55%, rgba(21, 23, 28, 0.25) 100%);
+}
+
+.trading-details-page .hero-overlay {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  text-align: left;
+}
+
+.trading-details-page .hero-overlay::before {
+  content: "// TRADING · WECON AUTHORIZED";
+  display: block;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: #e0838b;
+}
+
+.trading-details-page .hero-overlay h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.trading-details-page .hero-overlay p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #c7cdd8;
+  margin: 0;
+}
+
+/* --- Product module grid --- */
+.trading-details-page .trading-module-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  gap: 1.5rem;
 }
 
-.trading-module {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.trading-details-page .trading-module {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-base), box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
-.trading-module:hover {
+.trading-details-page .trading-module:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: transparent;
+  box-shadow: var(--shadow-lg);
 }
 
-.trading-module h2 {
-  background-color: rgba(34, 34, 34, 0.8);
-  color: #fff;
-  padding: 15px 25px;
-  margin: 0;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.module-content {
-  padding: 25px;
-  flex-grow: 1;
+.trading-details-page .trading-module h2 {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 1.1rem 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
 }
 
-.product-image-container {
-  text-align: center;
-  margin-bottom: 20px;
+.trading-details-page .trading-module h2::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--signal);
   flex-shrink: 0;
 }
 
-.product-image {
+.trading-details-page .module-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.5rem;
+}
+
+.trading-details-page .product-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  background: var(--panel);
+  border-radius: var(--radius-md);
+}
+
+.trading-details-page .product-image {
   max-width: 100%;
-  height: auto;
-  max-height: 200px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.module-content h3 {
-  color: var(--text-color);
-  font-size: 20px;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-weight: 600;
+.trading-details-page .module-content p {
+  margin-bottom: 1.25rem;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--text-2);
 }
 
-.module-content p {
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.module-content ul {
-  list-style-type: none;
-  padding-left: 20px;
-  margin-bottom: 0;
+.trading-details-page .module-content ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
   flex-grow: 1;
 }
 
-.module-content li {
-  margin-bottom: 10px;
+.trading-details-page .module-content li {
   position: relative;
-  padding-left: 25px;
+  padding-left: 1.6rem;
+  font-size: 0.92rem;
   line-height: 1.5;
+  color: var(--text);
 }
 
-.module-content li::before {
-  content: "✓";
-  color: var(--button-color);
+.trading-details-page .module-content li::before {
+  content: "";
   position: absolute;
   left: 0;
-  font-weight: bold;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--signal);
 }
 
-.module-content li:last-child {
-  margin-bottom: 0;
-}
-
-.back-button-container {
-  margin-top: 40px;
+/* --- Back button --- */
+.trading-details-page .back-button-container {
+  margin-top: 3rem;
   text-align: center;
 }
 
-.back-button {
-  background-color: var(--accent-color-2);
-  color: #fff;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+.trading-details-page .back-button {
+  padding: 0.85rem 1.8rem;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: transform var(--transition-fast), border-color var(--transition-base);
 }
 
-.back-button:hover {
-  transform: translateY(-5px);
+.trading-details-page .back-button:hover {
+  transform: translateY(-2px);
+  border-color: var(--ink);
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-  .trading-module-grid {
+@media (max-width: 860px) {
+  .trading-details-page .trading-module-grid {
     grid-template-columns: 1fr;
   }
-
-  .hero-section {
-    height: 350px;
-  }
-
-  .hero-overlay h1 {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-section {
-    height: 300px;
-  }
-
-  .hero-overlay h1 {
-    font-size: 28px;
-  }
-
-  .hero-overlay p {
-    font-size: 16px;
-  }
-
-  .trading-module h2 {
-    font-size: 20px;
-  }
-
-  .module-content {
-    padding: 20px;
-  }
-
-  .module-content h3 {
-    font-size: 18px;
-  }
-
-  .product-image {
-    max-height: 180px;
-  }
 }
 
 @media (max-width: 480px) {
-  .hero-section {
-    height: 250px;
-  }
-
-  .hero-overlay h1 {
-    font-size: 24px;
-  }
-}
-
-.hero-overlay {
-  text-align: center;
-  width: 100%;
-  padding: 40px 20px;
-  /* Increased padding top and bottom from 0 to 40px */
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.hero-overlay h1 {
-  font-size: 42px;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.hero-overlay p {
-  font-size: 18px;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  color: #fff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-/* Make sure these responsive styles are maintained */
-@media (max-width: 992px) {
-  .hero-overlay h1 {
-    font-size: 36px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-overlay {
-    padding: 30px 20px;
-    /* Slightly less padding on smaller screens */
-  }
-
-  .hero-overlay h1 {
-    font-size: 28px;
-  }
-
-  .hero-overlay p {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-overlay {
-    padding: 25px 15px;
-    /* Even less padding on very small screens */
-  }
-
-  .hero-overlay h1 {
-    font-size: 24px;
-    margin-bottom: 15px;
+  .trading-details-page .hero-section {
+    min-height: 300px;
+    padding: 1.75rem;
   }
 }

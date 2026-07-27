@@ -1,137 +1,124 @@
 .training {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    padding: 100px;
-    background-image: url(../../assets/training-bg.jpg);
-    background-size: cover;
-    background-position: center;
-    color: #ffffff;
-    text-align: center;
+  position: relative;
+  padding: clamp(4rem, 9vw, 7rem) 0;
+  background: var(--ink);
+  color: #e7e9ee;
+  overflow: hidden;
 }
 
-.training h2 {
-    font-size: 36px;
-    font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 50px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
+/* Faint blueprint grid over the dark panel */
+.training::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+  pointer-events: none;
+}
+
+.training .container {
+  position: relative;
+  z-index: 1;
+}
+
+.training-head {
+  max-width: 640px;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.eyebrow--dark {
+  color: #9aa3b2;
+}
+
+.training-head h2 {
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  margin: 1rem 0 0;
+  color: #fff;
+}
+
+.training-head p {
+  margin-top: 1.1rem;
+  font-size: 1.06rem;
+  line-height: 1.7;
+  color: #aab2c0;
 }
 
 .training-cards {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 50px;
-    width: 100%;
-    max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
 .training-card {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    margin: 20px;
-    width: 40%;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    text-align: start;
-    color: var(--text-color);
+  position: relative;
+  padding: 2rem;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-base), border-color var(--transition-base);
 }
 
 .training-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-6px);
+  border-color: rgba(226, 58, 46, 0.55);
+}
+
+.training-card-ref {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.07);
+}
+
+.training-card h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 0.85rem;
+  max-width: 80%;
+}
+
+.training-card p {
+  color: #aab2c0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.industries-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.industries-list li {
+  padding: 0.35rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: #cbd1db;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-full);
 }
 
 .view-all-training {
-    text-align: center;
-    margin-top: 40px;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-.view-all-btn {
-    background: #212ea0e1;
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s ease-in-out;
-    text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 50px;
-    transition: all var(--transition-base);
-}
+@media (max-width: 760px) {
+  .training-cards {
+    grid-template-columns: 1fr;
+  }
 
-.view-all-btn:hover {
-    /* background-color: var(--accent-color); */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-}
-
-/* Expandable Training Details */
-.training-details {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 900px;
-    text-align: left;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.training-details h3 {
-    font-size: 24px;
-    color: var(--button-color);
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.training-module {
-    margin-bottom: 20px;
-}
-
-.training-module h4 {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 10px;
-}
-
-.training-module ul {
-    padding-left: 20px;
-}
-
-.training-module ul li {
-    font-size: 16px;
-    color: var(--text-color);
-    margin-bottom: 8px;
-    position: relative;
-    padding-left: 20px;
-}
-
-.training-module ul li::before {
-    content: "✓";
-    color: var(--button-color);
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 900px) {
-    .training-card {
-        width: 80%;
-        margin: auto;
-    }
-
-    .training-details {
-        width: 90%;
-    }
+  .training-card h3 {
+    max-width: 100%;
+  }
 }

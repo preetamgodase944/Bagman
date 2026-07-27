@@ -80,21 +80,25 @@ export default function Products() {
   };
 
   return (
-    <section className="products" id="products">
+    <section className="products section" id="products">
       <div className="container">
-        <div className="section-title">
-          <h2>Our Products</h2>
-          <p className="section-description">
-            GSIA is one of the leading global manufacturers of Electrical Control Panels. We independently develop, manufacture of Electrical Control Panels, and sell HMI, PLC, IoT V-BOX, SERVO, and INVERTER for automation projects.
+        <header className="products-head reveal">
+          <span className="eyebrow">Manufacturing</span>
+          <h2>Control panels, engineered in-house</h2>
+          <p>
+            GSIA designs, builds, and services electrical control panels — with HMI,
+            PLC, IoT V-BOX, servo, and inverter integration tuned to each line.
           </p>
-        </div>
+        </header>
 
         <div className="products-grid">
-          {Object.keys(productDetails).map((productId) => {
+          {Object.keys(productDetails).map((productId, index) => {
             const product = productDetails[productId];
+            const ref = `P/${String(index + 1).padStart(2, '0')}`;
             return (
-              <div className="product-card" key={productId}>
+              <article className="product-card" key={productId}>
                 <div className="product-image-container">
+                  <span className="product-ref">{ref}</span>
                   <img
                     src={product.image}
                     alt={`${product.title} product`}
@@ -110,10 +114,11 @@ export default function Products() {
                     onClick={(e) => handleLearnMore(productId, e)}
                     aria-label={`Learn more about ${product.title}`}
                   >
-                    Learn More
+                    Learn more
+                    <span aria-hidden="true">&rarr;</span>
                   </button>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>

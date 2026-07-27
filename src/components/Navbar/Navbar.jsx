@@ -127,6 +127,15 @@ export default function Navbar() {
               About Us
             </Link>
           </li>
+          <li className="navbar-item navbar-cta-item">
+            <Link
+              to="/#contact-us"
+              className="nav-cta"
+              onClick={() => scrollToSection('contact-us')}
+            >
+              Get a quote
+            </Link>
+          </li>
         </ul>
         <button
           className="navbar-toggle"

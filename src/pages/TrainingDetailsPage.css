@@ -1,385 +1,339 @@
 .training-details-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    font-family: Arial, sans-serif;
-    color: var(--text-color);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: calc(var(--header-height) + 2.5rem) var(--container-padding) 5rem;
+  color: var(--text);
+}
+
+/* --- Hero --- */
+.training-details-page .hero-section {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 460px;
+  margin-bottom: 4rem;
+  padding: 3rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.training-details-page .hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.training-details-page .hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(21, 23, 28, 0.92) 0%, rgba(21, 23, 28, 0.5) 60%, rgba(21, 23, 28, 0.2) 100%);
+}
+
+.training-details-page .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  background: none;
+  padding: 0;
+  text-align: left;
+}
+
+.training-details-page .hero-content::before {
+  content: "// TRAINING · HANDS-ON, ON REAL HARDWARE";
+  display: block;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: #e0838b;
+}
+
+.training-details-page .hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.training-details-page .hero-content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #c7cdd8;
+  margin: 0 0 1.75rem;
+}
+
+.training-details-page .download-btn {
+  padding: 0.85rem 1.6rem;
+  background: var(--signal);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-signal);
+  transition: transform var(--transition-fast), background var(--transition-base);
+}
+
+.training-details-page .download-btn:hover {
+  transform: translateY(-2px);
+  background: var(--signal-deep);
+}
+
+/* --- About --- */
+.training-details-page .about-us-section {
+  max-width: 760px;
+  margin: 0 0 4.5rem;
+  text-align: left;
+  padding: 0;
+}
+
+.training-details-page .about-us-section h2 {
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.training-details-page .about-us-section h2::after {
+  display: none;
+}
+
+.training-details-page .about-us-section p {
+  font-size: 1.06rem;
+  line-height: 1.75;
+  color: var(--text-2);
+  margin: 0;
+}
+
+/* --- Modules --- */
+.training-details-page .training-module-section {
+  margin: 0 0 4.5rem;
+}
+
+.training-details-page .training-module-section h2 {
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  margin: 0 0 2.5rem;
+  text-align: left;
+  left: auto;
+  transform: none;
+  display: block;
+}
+
+.training-details-page .training-module-section h2::after {
+  display: none;
+}
+
+.training-details-page .modules-container {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.training-details-page .module-item {
+  padding: 1.75rem 2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--signal);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.training-details-page .module-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.training-details-page .module-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.training-details-page .module-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.training-details-page .module-item h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.training-details-page .module-content {
+  padding-left: 54px;
+}
+
+.training-details-page .module-content-list {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+}
+
+.training-details-page .module-content-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.training-details-page .module-content-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--signal);
+}
+
+.training-details-page .module-content-paragraph {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.training-details-page .module-content-labeled-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.training-details-page .labeled-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.training-details-page .labeled-item .label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  min-width: 90px;
+}
+
+.training-details-page .labeled-item .value {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* --- CTA --- */
+.training-details-page .cta-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  border-top: 3px solid var(--signal);
+}
+
+.training-details-page .cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 46px 46px;
+  opacity: 1;
+  z-index: 0;
+}
+
+.training-details-page .cta-section h2 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.training-details-page .cta-section p {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #b7bfcc;
+}
+
+.training-details-page .enroll-btn {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  background: var(--signal);
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-signal);
+  transition: transform var(--transition-fast), background var(--transition-base);
+}
+
+.training-details-page .enroll-btn:hover {
+  transform: translateY(-2px);
+  background: var(--signal-deep);
+}
+
+.training-details-page .enroll-btn a {
+  display: inline-block;
+  padding: 0.9rem 1.9rem;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .training-details-page .hero-section {
+    min-height: 380px;
+    padding: 2rem;
   }
-  
-  /* Hero Section */
-  .hero-section {
-    position: relative;
-    overflow: hidden;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    margin-bottom: 60px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-  }
-  
-  .hero-content {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 40px;
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
-    max-width: 700px;
-  }
-  
-  .hero-content h1 {
-    font-size: 36px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 15px;
-  }
-  
-  .hero-content p {
-    font-size: 18px;
-    max-width: 600px;
-    margin: 0 auto 25px;
-  }
-  
-  .download-btn {
-    background: var(--accent-color-2);
-    color: #fff;
-    border: none;
-    padding: 12px 28px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 700;
-  }
-  
-  .download-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* About Us */
-  .about-us-section {
-    margin-bottom: 60px;
-    text-align: center;
-    padding: 0 20px;
-  }
-  
-  .about-us-section h2 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-  }
-  
-  .about-us-section h2:after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 3px;
-    background: var(--accent-color-2);
-  }
-  
-  .about-us-section p {
-    font-size: 18px;
-    line-height: 1.7;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  /* Training Module Section - MODERN REDESIGN */
-  .training-module-section {
-    margin: 80px 0;
-  }
-  
-  .training-module-section h2 {
-    font-size: 32px;
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .training-module-section h2:after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 3px;
-    background: var(--accent-color-2);
-  }
-  
-  .modules-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  
-  .module-item {
-    padding: 30px;
-    background-color: #f8f9fa;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    border-left: 5px solid var(--accent-color-2);
-  }
-  
-  .module-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  }
-  
-  .module-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 15px;
-  }
-  
-  .module-number {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background-color: var(--accent-color-2);
-    color: white;
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-  
-  .module-item h3 {
-    font-size: 24px;
-    color: var(--text-color);
-    margin: 0;
-    font-weight: 600;
-  }
-  
-  .module-content {
-    padding-left: 55px;
-  }
-  
-  /* List styling */
-  .module-content-list {
-    list-style-type: none;
+
+  .training-details-page .module-content {
     padding-left: 0;
-    margin: 0;
+    margin-top: 1rem;
   }
-  
-  .module-content-list li {
-    margin-bottom: 12px;
-    position: relative;
-    padding-left: 25px;
-    line-height: 1.6;
+
+  .training-details-page .module-item {
+    padding: 1.5rem;
   }
-  
-  .module-content-list li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--accent-color-2);
-    font-weight: bold;
+}
+
+@media (max-width: 480px) {
+  .training-details-page .hero-section {
+    min-height: 320px;
+    padding: 1.5rem;
   }
-  
-  .module-content-list li:last-child {
-    margin-bottom: 0;
-  }
-  
-  /* Paragraph styling */
-  .module-content-paragraph {
-    line-height: 1.7;
-    color: #555;
-    margin: 0;
-  }
-  
-  /* Labeled list styling */
-  .module-content-labeled-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .labeled-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 10px;
-  }
-  
-  .labeled-item .label {
-    font-weight: bold;
-    color: var(--text-color);
-    min-width: 80px;
-  }
-  
-  .labeled-item .value {
-    color: #555;
-  }
-  
-  /* Call to Action */
-  .cta-section {
-    text-align: center;
-    padding: 60px 40px;
-    background: linear-gradient(135deg, #1f4037, #99f2c8);
-    color: white;
-    border-radius: 15px;
-    margin-top: 80px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .cta-section:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(255,255,255,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
-    opacity: 0.3;
-    z-index: 0;
-  }
-  
-  .cta-section h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: #fff;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .cta-section p {
-    font-size: 18px;
-    margin-bottom: 30px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    z-index: 1;
-  }
-  
-  .enroll-btn {
-    background-color: white;
-    border: none;
-    color: var(--accent-color-2);
-    padding: 14px 32px;
-    font-size: 18px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .enroll-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .enroll-btn a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .training-details-page {
-      padding: 20px 15px;
-      margin-top: 25px;
-    }
-    
-    .hero-section {
-      height: 400px;
-    }
-  
-    .hero-content {
-      padding: 20px;
-      width: 90%;
-    }
-  
-    .hero-content h1 {
-      font-size: 26px;
-    }
-  
-    .hero-content p {
-      font-size: 16px;
-    }
-    
-    .about-us-section h2,
-    .training-module-section h2,
-    .cta-section h2 {
-      font-size: 24px;
-    }
-    
-    .module-header {
-      flex-direction: row;
-      align-items: flex-start;
-    }
-    
-    .module-content {
-      padding-left: 0;
-      margin-top: 15px;
-    }
-    
-    .module-item h3 {
-      font-size: 20px;
-    }
-    
-    .cta-section {
-      padding: 40px 20px;
-    }
-    
-    .enroll-btn {
-      padding: 12px 24px;
-      font-size: 16px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-section {
-      height: 350px;
-    }
-    
-    .hero-content h1 {
-      font-size: 22px;
-    }
-    
-    .about-us-section p,
-    .cta-section p {
-      font-size: 16px;
-    }
-    
-    .module-item {
-      padding: 20px 15px;
-    }
-    
-    .module-number {
-      width: 30px;
-      height: 30px;
-      font-size: 16px;
-    }
-  }
+}

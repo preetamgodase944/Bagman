@@ -71,27 +71,38 @@ const Training = () => {
   };
 
   return (
-    <div className="training container" id="training">
-      <h2>Our Training Programs</h2>
-      <div className="training-cards">
-        {trainingPrograms.map((program, index) => (
-          <div className="training-card" key={index}>
-            <h3>{program.title}</h3>
-            <p>{program.description}</p>
-            <ul className="industries-list">
-              {program.industries.map((industry, idx) => (
-                <li key={idx}>{industry}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+    <section className="training" id="training">
+      <div className="container">
+        <header className="training-head reveal">
+          <span className="eyebrow eyebrow--dark">Training</span>
+          <h2>Build the engineers who run the line</h2>
+          <p>
+            Hands-on programs taught on live hardware — PLC, SCADA, HMI, VFD, and
+            industrial IoT — to recognized industry standards.
+          </p>
+        </header>
 
-      {/* Explore More Training Button */}
-      <div className="view-all-training">
-        <button className="view-all-btn" onClick={() => onButtonClick()}>
-          {"Show Details"}
-        </button>
+        <div className="training-cards">
+          {trainingPrograms.map((program, index) => (
+            <article className="training-card" key={index}>
+              <span className="training-card-ref">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{program.title}</h3>
+              <p>{program.description}</p>
+              <ul className="industries-list">
+                {program.industries.map((industry, idx) => (
+                  <li key={idx}>{industry}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        <div className="view-all-training">
+          <button className="btn btn--primary" onClick={() => onButtonClick()}>
+            Explore all programs
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
       </div>
 
       {/* Expandable Section */}
@@ -110,7 +121,7 @@ const Training = () => {
           ))}
         </div>
       )} */}
-    </div>
+    </section>
   );
 };
 

@@ -1,9 +1,13 @@
+'use client';
+
 import { useState } from 'react';
+import Image from 'next/image';
 import './Products.css';
-import product_1a from '../../assets/product_1a.png';
-import product_2 from '../../assets/product_2.png';
-import product_3 from '../../assets/product_3.png';
-import product_4 from '../../assets/product_4.png';
+
+const product_1a = '/assets/product_1a.png';
+const product_2 = '/assets/product_2.png';
+const product_3 = '/assets/product_3.png';
+const product_4 = '/assets/product_4.png';
 
 export default function Products() {
   const [activeModal, setActiveModal] = useState(null);
@@ -99,11 +103,12 @@ export default function Products() {
               <article className="product-card" key={productId}>
                 <div className="product-image-container">
                   <span className="product-ref">{ref}</span>
-                  <img
+                  <Image
                     src={product.image}
                     alt={`${product.title} product`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 360px"
                     className="product-image"
-                    loading="lazy"
                   />
                 </div>
                 <div className="product-content">
@@ -142,11 +147,12 @@ export default function Products() {
               ×
             </button>
             <div className="modal-image-container">
-              <img
+              <Image
                 src={productDetails[activeModal].image}
                 alt={productDetails[activeModal].title}
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
                 className="modal-image"
-                loading="lazy"
               />
             </div>
             <div className="modal-content">

@@ -1,8 +1,12 @@
+'use client';
+
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import './Hero.css';
-import image_1 from '../../assets/hero_ai_1.jpeg';
-import image_2 from '../../assets/hero_ai_2.jpeg';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+
+const image_1 = '/assets/hero_ai_1.jpeg';
+const image_2 = '/assets/hero_ai_2.jpeg';
 
 const slides = [
   { img: image_1, caption: 'Packaging & milling lines', alt: 'Automated packaging line with GSIA control panel' },
@@ -38,7 +42,7 @@ export default function Hero() {
 
           <div className="hero-actions">
             <a href="#products" className="btn btn--primary">Explore products</a>
-            <Link to="/trading/details" className="btn btn--ghost">View trading range</Link>
+            <Link href="/trading/details" className="btn btn--ghost">View trading range</Link>
           </div>
 
           <ul className="hero-spec" aria-label="Capabilities">
@@ -60,12 +64,14 @@ export default function Hero() {
         <div className="hero-panel">
           <div className="hero-viewport">
             {slides.map((s, i) => (
-              <img
+              <Image
                 key={i}
                 src={s.img}
                 alt={s.alt}
+                fill
+                priority={i === 0}
+                sizes="(max-width: 950px) 100vw, 45vw"
                 className={`hero-shot ${current === i ? 'is-active' : ''}`}
-                loading={i === 0 ? 'eager' : 'lazy'}
               />
             ))}
 

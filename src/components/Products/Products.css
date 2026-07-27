@@ -186,6 +186,7 @@
 }
 
 .modal-image-container {
+  position: relative;
   height: 240px;
   overflow: hidden;
   background: var(--panel);

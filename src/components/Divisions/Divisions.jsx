@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import './Divisions.css';
 import { scrollToTop } from '../../utils/Helper';
 
@@ -48,7 +50,7 @@ export default function Divisions() {
         <div className="divisions-grid">
           {divisions.map((d, i) => (
             <Link
-              to={d.to}
+              href={d.to}
               key={d.tag}
               className="division-card reveal"
               style={{ transitionDelay: `${i * 90}ms` }}

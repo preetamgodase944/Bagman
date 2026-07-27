@@ -1,14 +1,17 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+'use client';
+
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import "./TradingDetailsPage.css";
-import vbox from './../assets/vbox.png';
-import servo from './../assets/servo.png';
-import plc from './../assets/plc.png';
-import hmi from './../assets/hmi.png';
-import inverter from './../assets/inverter.png';
-import ethernet from './../assets/ethernet.png';
-import heroImage from './../assets/automation-hero.png'; // Import a wide automation hero image
 import { scrollToTop } from "../utils/Helper";
+
+const vbox = '/assets/vbox.png';
+const servo = '/assets/servo.png';
+const plc = '/assets/plc.png';
+const hmi = '/assets/hmi.png';
+const inverter = '/assets/inverter.png';
+const ethernet = '/assets/ethernet.png';
+const heroImage = '/assets/automation-hero.png';
 
 const tradingDetails = {
   "header": {
@@ -20,6 +23,8 @@ const tradingDetails = {
       "id": "vbox",
       "title": "WECON V-BOX (Iot Gateway)",
       "image": vbox,
+      "width": 814,
+      "height": 518,
       "description": "Wecon Iot Gateway (V-BOX) is the basic hardware of Wecon Iot platform(V-NET). It is an indispensable equipment about information exchange and protocol conversion for the communication between the IoT cloud platform and the system.",
       "features": [
         "Define LUA scripts to connect PLC-controlled machines with cloud platforms",
@@ -33,6 +38,8 @@ const tradingDetails = {
       "id": "servo",
       "title": "WECON SERVO DRIVES",
       "image": servo,
+      "width": 900,
+      "height": 913,
       "description": "Wecon Servo Drives feature high response, easy debugging, and strong protection capabilities. They support virtual I/O function, internal multi-stage speed command, internal multi-stage position command, etc. with excellent performance for wide-ranging applications.",
       "features": [
         "High precision and responsive control",
@@ -46,6 +53,8 @@ const tradingDetails = {
       "id": "plc",
       "title": "WECON PLC",
       "image": plc,
+      "width": 814,
+      "height": 518,
       "description": "Wecon PLC offers high precision, fast speed, and strong stability. In addition to its own various peripheral interfaces, it can expand with various types of expansion modules and BD boards to meet different industrial applications.",
       "features": [
         "High precision and processing speed",
@@ -59,6 +68,8 @@ const tradingDetails = {
       "id": "hmi",
       "title": "WECON HMI",
       "image": hmi,
+      "width": 1600,
+      "height": 900,
       "description": "Wecon HMI has been widely recognized in the market for being economical, practical, with fast response speed and high configuration options.",
       "features": [
         "Economical and practical interface solutions",
@@ -72,6 +83,8 @@ const tradingDetails = {
       "id": "inverter",
       "title": "WECON INVERTER",
       "image": inverter,
+      "width": 814,
+      "height": 518,
       "description": "WECON Inverters are independently developed product platforms with outstanding performance for various industrial automation control applications.",
       "features": [
         "Independent R&D Product Platform",
@@ -84,6 +97,8 @@ const tradingDetails = {
       "id": "ethernet",
       "title": "INDUSTRIAL ETHERNET SWITCH",
       "image": ethernet,
+      "width": 1096,
+      "height": 755,
       "description": "Industrial-grade Ethernet switches designed for reliable network connectivity in harsh industrial environments.",
       "features": [
         "5 Ethernet Ports for comprehensive connectivity",
@@ -97,13 +112,20 @@ const tradingDetails = {
 };
 
 const TradingDetailsPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const data = tradingDetails;
 
   return (
     <div className="trading-details-page">
       <div className="hero-section">
-        <img src={heroImage} alt="Industrial Automation" className="hero-image" />
+        <Image
+          src={heroImage}
+          alt="Industrial Automation"
+          fill
+          priority
+          sizes="100vw"
+          className="hero-image"
+        />
         <div className="hero-overlay">
             <h1>{data.header.title}</h1>
             <p>{data.header.description}</p>
@@ -116,10 +138,14 @@ const TradingDetailsPage = () => {
             <h2>{product.title}</h2>
             <div className="module-content">
               <div className="product-image-container">
-                <img
+                <Image
                   src={product.image}
                   alt={product.title}
+                  width={product.width}
+                  height={product.height}
+                  sizes="(max-width: 768px) 90vw, 320px"
                   className="product-image"
+                  style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
                 />
               </div>
               <p>{product.description}</p>
@@ -134,7 +160,7 @@ const TradingDetailsPage = () => {
       </div>
 
       <div className="back-button-container">
-        <button className="back-button" onClick={() => {navigate('/');scrollToTop()}}>
+        <button className="back-button" onClick={() => {router.push('/');scrollToTop()}}>
           Back to Home
         </button>
       </div>

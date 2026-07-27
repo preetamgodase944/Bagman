@@ -1,9 +1,13 @@
+'use client';
+
 import './Contact.css';
-import mail_icon from '../../assets/mail-icon.png';
-import phone_icon from '../../assets/phone-icon.png';
-import location_icon from '../../assets/location-icon.png';
-import whatsapp_icon from '../../assets/whatsapp.svg';
+import Image from 'next/image';
 import { useState } from 'react';
+
+const mail_icon = '/assets/mail-icon.png';
+const phone_icon = '/assets/phone-icon.png';
+const location_icon = '/assets/location-icon.png';
+const whatsapp_icon = '/assets/whatsapp.svg';
 
 export default function Contact() {
 
@@ -16,7 +20,7 @@ export default function Contact() {
       const formData = new FormData(event.target);
 
       // Use environment variable here
-      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+      formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY);
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -50,21 +54,21 @@ export default function Contact() {
 
           <ul className="contact-channels">
             <li>
-              <img src={mail_icon} alt="" />
+              <Image src={mail_icon} alt="" width={22} height={22} />
               <div>
                 <span className="channel-key">Email</span>
                 <a href="mailto:reach.gsia@gmail.com">reach.gsia@gmail.com</a>
               </div>
             </li>
             <li>
-              <img src={phone_icon} alt="" />
+              <Image src={phone_icon} alt="" width={22} height={22} />
               <div>
                 <span className="channel-key">Phone</span>
                 <a href="tel:+917349443674">+91 73494 43674</a>
               </div>
             </li>
             <li>
-              <img src={location_icon} alt="" />
+              <Image src={location_icon} alt="" width={22} height={22} />
               <div>
                 <span className="channel-key">Workshop</span>
                 <span className="channel-val">Mallathhalli, Bengaluru 560056</span>
@@ -78,7 +82,7 @@ export default function Contact() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={whatsapp_icon} alt="" />
+            <Image src={whatsapp_icon} alt="" width={20} height={20} />
             Chat on WhatsApp
           </a>
         </div>

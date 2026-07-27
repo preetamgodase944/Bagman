@@ -1,10 +1,11 @@
-import React from "react"; 
-import { Link, useNavigate } from "react-router-dom";
-import "./TrainingDetailsPage.css";
+'use client';
 
-// Import images
-import heroImage from "../assets/training-hero.png";
+import Link from "next/link";
+import Image from "next/image";
+import "./TrainingDetailsPage.css";
 import { downloadBrochure } from "../components/Helper/CommonFuctions";
+
+const heroImage = "/assets/training-hero.png";
 
 // Training modules data separated from UI
 const trainingModules = [
@@ -98,8 +99,6 @@ const trainingModules = [
 ];
 
 const TrainingDetailsPage = () => {
-  const navigate = useNavigate();
-
   const scrollToSection = (sectionId) => {
     setTimeout(() => {
       const element = document.getElementById(sectionId);
@@ -146,7 +145,14 @@ const TrainingDetailsPage = () => {
     <div className="training-details-page">
       {/* Hero Section */}
       <div className="hero-section">
-        <img src={heroImage} alt="Training in Progress" className="hero-image" />
+        <Image
+          src={heroImage}
+          alt="Training in Progress"
+          fill
+          priority
+          sizes="100vw"
+          className="hero-image"
+        />
         <div className="hero-content">
           <h1>Unlock Your Potential in Industrial Automation</h1>
           <p>
@@ -193,7 +199,7 @@ const TrainingDetailsPage = () => {
         </p>
         <button className="enroll-btn">
           <Link
-            to="/#contact-us"
+            href="/#contact-us"
             onClick={() => scrollToSection('contact-us')}
           >
             Contact Now

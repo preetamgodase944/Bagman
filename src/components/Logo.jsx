@@ -1,10 +1,18 @@
-import React from "react";
-import logo from '../assets/logo.png'
+import Image from 'next/image';
+
+const logo = '/assets/logo.png';
 
 const Logo = ({ height = "50px"}) => {
   return (
     <div className="flex items-center justify-center" style={{paddingTop: '10px'}}>
-      <img src={logo} alt="Company Logo" style={{ height }} />
+      <Image
+        src={logo}
+        alt="Company Logo"
+        width={375}
+        height={155}
+        priority
+        style={{ height, width: 'auto' }}
+      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import file from '../../assets/res/GSIA_BROCHURE.pdf';
+const file = '/assets/res/GSIA_BROCHURE.pdf';
 
 export const downloadBrochure = () => {
 

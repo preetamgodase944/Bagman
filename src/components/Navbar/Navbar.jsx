@@ -1,15 +1,21 @@
+'use client';
+
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Logo from '../Logo';
 import './Navbar.css';
-import menu_icon from '../../assets/menu-icon.svg';
-import close_icon from '../../assets/close-icon.svg';
 import { scrollToTop } from '../../utils/Helper';
+
+const menu_icon = '/assets/menu-icon.svg';
+const close_icon = '/assets/close-icon.svg';
 
 export default function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const [hash, setHash] = useState('');
+  const pathname = usePathname();
 
   // Add/remove scrolled class on scroll
   useEffect(() => {
@@ -18,12 +24,20 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Track the URL hash (next/navigation's usePathname excludes it)
+  useEffect(() => {
+    const updateHash = () => setHash(window.location.hash);
+    updateHash();
+    window.addEventListener('hashchange', updateHash);
+    return () => window.removeEventListener('hashchange', updateHash);
+  }, []);
+
   const toggleMobileMenu = () => setShowMobileMenu(prev => !prev);
 
   // Updated function to handle section navigation
   const scrollToSection = (sectionId) => {
     // First navigate to homepage if not already there
-    if (location.pathname !== '/') {
+    if (pathname !== '/') {
       // We need to set a timeout to allow the page to change before scrolling
       setTimeout(() => {
         const element = document.getElementById(sectionId);
@@ -44,11 +58,11 @@ export default function Navbar() {
     }
   };
 
-  const isLinkActive = (to, hash) => {
-    if (hash) {
-      return location.pathname === '/' && location.hash === hash;
+  const isLinkActive = (to, linkHash) => {
+    if (linkHash) {
+      return pathname === '/' && hash === linkHash;
     }
-    return location.pathname === to;
+    return pathname === to;
   };
 
   const handleScrollToTop = () => {
@@ -60,7 +74,7 @@ export default function Navbar() {
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
         <Link
-          to="/"
+          href="/"
           className="navbar-logo"
           onClick={() => {
             window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -72,8 +86,8 @@ export default function Navbar() {
         <ul className={`navbar-links ${showMobileMenu ? 'show-menu' : ''}`}>
           <li className="navbar-item">
             <Link
-              to="/"
-              className={`nav-button ${location.pathname === '/' && !location.hash ? 'active' : ''}`}
+              href="/"
+              className={`nav-button ${pathname === '/' && !hash ? 'active' : ''}`}
               onClick={() => {
                 window.scroll({ top: 0, left: 0, behavior: 'smooth' });
                 if (showMobileMenu) setShowMobileMenu(false);
@@ -84,7 +98,7 @@ export default function Navbar() {
           </li>
           <li className="navbar-item">
             <Link
-              to="/#products"
+              href="/#products"
               className={`nav-button ${isLinkActive('/', '#products') ? 'active' : ''}`}
               onClick={() => scrollToSection('products')}
             >
@@ -93,7 +107,7 @@ export default function Navbar() {
           </li>
           <li className="navbar-item">
             <Link
-              to="/training/details"
+              href="/training/details"
               onClick={handleScrollToTop}
               className={`nav-button ${isLinkActive('/training/details') ? 'active' : ''}`}
             >
@@ -102,7 +116,7 @@ export default function Navbar() {
           </li>
           <li className="navbar-item">
             <Link
-              to="/trading/details"
+              href="/trading/details"
               onClick={handleScrollToTop}
               className={`nav-button ${isLinkActive('/trading/details') ? 'active' : ''}`}
             >
@@ -111,7 +125,7 @@ export default function Navbar() {
           </li>
           <li className="navbar-item">
             <Link
-              to="/#contact-us"
+              href="/#contact-us"
               className={`nav-button ${isLinkActive('/', '#contact-us') ? 'active' : ''}`}
               onClick={() => scrollToSection('contact-us')}
             >
@@ -120,7 +134,7 @@ export default function Navbar() {
           </li>
           <li className="navbar-item">
             <Link
-              to="/#about-us"
+              href="/#about-us"
               className={`nav-button ${isLinkActive('/', '#about-us') ? 'active' : ''}`}
               onClick={() => scrollToSection('about-us')}
             >
@@ -129,7 +143,7 @@ export default function Navbar() {
           </li>
           <li className="navbar-item navbar-cta-item">
             <Link
-              to="/#contact-us"
+              href="/#contact-us"
               className="nav-cta"
               onClick={() => scrollToSection('contact-us')}
             >
@@ -142,9 +156,11 @@ export default function Navbar() {
           onClick={toggleMobileMenu}
           aria-label={showMobileMenu ? 'Close menu' : 'Open menu'}
         >
-          <img
+          <Image
             src={showMobileMenu ? close_icon : menu_icon}
             alt={showMobileMenu ? 'Close menu' : 'Open menu'}
+            width={24}
+            height={24}
             className="menu-icon"
           />
         </button>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+'use client';
+
+import { useRouter } from "next/navigation";
 import "./Training.css";
 import { scrollToTop } from "../../utils/Helper";
 
@@ -61,12 +62,10 @@ const trainingPrograms = [
 // ];
 
 const Training = () => {
-  // const [showDetails, setShowDetails] = useState(false);
-  const navigate = useNavigate();
-
+  const router = useRouter();
 
   const onButtonClick = () => {
-    navigate('/training/details');
+    router.push('/training/details');
     scrollToTop();
   };
 
